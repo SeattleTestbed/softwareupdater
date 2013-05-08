@@ -47,6 +47,46 @@ def get_file_hash(filename):
   return sha_hexhash(filedata)
 
 
+
+
+def generate_file_list(path):
+  """
+  <Purpose>
+    The purpose of this function is to recursively generate
+    a list of files that are important and will be added to
+    the metainfo file.
+  """
+  full_file_list = []
+  for root, dirname, file_list in os.walk(path):
+    for cur_file in file_list:
+      filename = os.path.join(root, cur_file)
+      # ignore pyc files...
+      if filename.endswith('.pyc'):
+        continue
+
+      # ignore swp files...
+      if filename.endswith('.swp'):
+        continue
+    
+      # ignore repy preprocessed files...
+      if filename.endswith('_repy.py'):
+        continue
+
+      # ignore directories... -Brent
+      if os.path.isdir(filename):
+        continue
+
+      # ignore the metainfo file
+      if filename.endswith('metainfo'):
+        continue
+
+      full_file_list.append(filename)
+
+  return full_file_list
+
+
+
+
 def get_previous_entries():
   if not os.path.exists('metainfo'):
     return {}
@@ -79,42 +119,28 @@ def create_metainfo_file(privatekeyfilename, publickeyfilename, new=False):
   outstring = ''
   updatedlist = []
 
-  for filename in os.listdir('.'):
-    # ignore pyc files...
-    if filename.endswith('.pyc'):
-      continue
 
-    # ignore swp files...
-    if filename.endswith('.swp'):
-      continue
-    
-    # ignore repy preprocessed files...
-    if filename.endswith('_repy.py'):
-      continue
+    # Generate a list of all the files from the current directory.
+    filename_list = generate_file_list('.')
 
-    # ignore directories... -Brent
-    if os.path.isdir(filename):
-      continue
+    # Go through all the files and add the files name and hash
+    # to the meta file.
+    for filename in filename_list:
+      filehash = get_file_hash(filename)
+      filesize = os.path.getsize(filename)
 
-    # ignore the metainfo file
-    if filename == 'metainfo':
-      continue
+      if filename not in previous_entries:
+        if not new:
+          print "Warning: '"+filename+"' not in previous metainfo file!"
 
-    filehash = get_file_hash(filename)
-    filesize = os.path.getsize(filename)
+      elif (filehash != previous_entries[filename][0] and filesize == previous_entries[filename][1]) or (filehash == previous_entries[filename][0] and filesize != previous_entries[filename][1]):
+        print "Warning, '"+filename+"' has only a hash or file size change but not both (how odd)."
 
-    if filename not in previous_entries:
-      if not new:
-        print "Warning: '"+filename+"' not in previous metainfo file!"
+      elif (filehash != previous_entries[filename][0] and filesize != previous_entries[filename][1]):
+        # it was updated.   We'll display output to this effect later.
+        updatedlist.append(filename)
 
-    elif (filehash != previous_entries[filename][0] and filesize == previous_entries[filename][1]) or (filehash == previous_entries[filename][0] and filesize != previous_entries[filename][1]):
-      print "Warning, '"+filename+"' has only a hash or file size change but not both (how odd)."
-
-    elif (filehash != previous_entries[filename][0] and filesize != previous_entries[filename][1]):
-      # it was updated.   We'll display output to this effect later.
-      updatedlist.append(filename)
-
-    outstring = outstring + filename+" "+filehash+" "+str(filesize)+"\n"
+      outstring = outstring + filename+" "+filehash+" "+str(filesize)+"\n"
 
 
   # Okay, great.   We should have it all ready now.   Let's sign our data
