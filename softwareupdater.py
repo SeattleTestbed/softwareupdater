@@ -669,7 +669,7 @@ def restart_software_updater():
 
   # wait for some time (1 minute) for them to init and stop them if they don't
   for junkcount in range(30):
-    do_sleep(2.0)
+    sleep(2.0)
 
     # if "OK" file exists, release softwareupdater.old, remove OK file and exit
     if os.path.exists("softwareupdater.OK."+thismutex):
