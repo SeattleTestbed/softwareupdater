@@ -120,27 +120,27 @@ def create_metainfo_file(privatekeyfilename, publickeyfilename, new=False):
   updatedlist = []
 
 
-    # Generate a list of all the files from the current directory.
-    filename_list = generate_file_list('.')
+  # Generate a list of all the files from the current directory.
+  filename_list = generate_file_list('.')
 
-    # Go through all the files and add the files name and hash
-    # to the meta file.
-    for filename in filename_list:
-      filehash = get_file_hash(filename)
-      filesize = os.path.getsize(filename)
+  # Go through all the files and add the files name and hash
+  # to the meta file.
+  for filename in filename_list:
+    filehash = get_file_hash(filename)
+    filesize = os.path.getsize(filename)
 
-      if filename not in previous_entries:
-        if not new:
-          print "Warning: '"+filename+"' not in previous metainfo file!"
+    if filename not in previous_entries:
+      if not new:
+        print "Warning: '"+filename+"' not in previous metainfo file!"
 
-      elif (filehash != previous_entries[filename][0] and filesize == previous_entries[filename][1]) or (filehash == previous_entries[filename][0] and filesize != previous_entries[filename][1]):
-        print "Warning, '"+filename+"' has only a hash or file size change but not both (how odd)."
+    elif (filehash != previous_entries[filename][0] and filesize == previous_entries[filename][1]) or (filehash == previous_entries[filename][0] and filesize != previous_entries[filename][1]):
+      print "Warning, '"+filename+"' has only a hash or file size change but not both (how odd)."
 
-      elif (filehash != previous_entries[filename][0] and filesize != previous_entries[filename][1]):
-        # it was updated.   We'll display output to this effect later.
-        updatedlist.append(filename)
+    elif (filehash != previous_entries[filename][0] and filesize != previous_entries[filename][1]):
+      # it was updated.   We'll display output to this effect later.
+      updatedlist.append(filename)
 
-      outstring = outstring + filename+" "+filehash+" "+str(filesize)+"\n"
+    outstring = outstring + filename+" "+filehash+" "+str(filesize)+"\n"
 
 
   # Okay, great.   We should have it all ready now.   Let's sign our data
