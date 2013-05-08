@@ -59,7 +59,9 @@ def generate_file_list(path):
   full_file_list = []
   for root, dirname, file_list in os.walk(path):
     for cur_file in file_list:
-      filename = os.path.join(root, cur_file)
+      # Note that we ignore the first two characters
+      # of the filename because it is './'.
+      filename = os.path.join(root, cur_file)[2:]
       # ignore pyc files...
       if filename.endswith('.pyc'):
         continue
