@@ -767,7 +767,7 @@ def main():
 
   while True:
     # sleep for 5-55 minutes 
-    for junk in range(random.randint(10, 110)):
+    for junk in range(random.randint(10, 12)):
       # We need to wake up every 30 seconds otherwise we will take
       # the full 5-55 minutes before we die when someone tries to
       # kill us nicely.
