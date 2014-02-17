@@ -171,6 +171,14 @@ def safe_download(serverpath, filename, destdir, filesize):
   # TODO: raise an RsyncError from here if the download fails instead of
   #       returning True/False.
   try:
+    # Create the destination directory just in case
+    fullpath = os.path.join(destdir, filename)
+    destination_directory = os.path.dirname(fullpath)
+    os.makedirs(destination_directory)
+  except OSError:
+    pass
+
+  try:
     urllib.urlretrieve(serverpath+filename,destdir+filename)
     return True
 
@@ -213,6 +221,13 @@ def _copy(orig_filename, copy_filename):
   # AR: Wrap Android-specific shutil.copy() quirks. They seem to have a problem 
   # setting the file access mode bits there, and shutil.copyfile() suffices 
   # for the task at hand.
+
+  try:
+    # Create the destination directory just in case
+    destination_directory = os.path.dirname(copy_filename)
+    os.makedirs(destination_directory)
+  except OSError:
+    pass
 
   if not is_android:
     shutil.copy(orig_filename, copy_filename)
