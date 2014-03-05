@@ -179,7 +179,8 @@ def safe_download(serverpath, filename, destdir, filesize):
     pass
 
   try:
-    urllib.urlretrieve(serverpath+filename,destdir+filename)
+    # Fix for #1361.   serverpath may not end in '/'
+    urllib.urlretrieve(serverpath+'/'+filename,destdir+filename)
     return True
 
   except Exception,e:
