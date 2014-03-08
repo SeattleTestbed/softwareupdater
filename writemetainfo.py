@@ -27,7 +27,6 @@ import tempfile
 repycachedir = tempfile.mkdtemp()
 
 sys.path = [repycachedir] + sys.path
-repyhelpercachedir = repyhelper.set_importcachedir(repycachedir)
 
 dy_import_module_symbols("rsa.repy")
 dy_import_module_symbols("signeddata.repy")

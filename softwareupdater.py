@@ -30,14 +30,6 @@ except ImportError:
 
 import daemon
 
-# I need to make a cachedir for repyhelper...
-if not os.path.exists('softwareupdater.repyhelpercache'):
-  os.mkdir('softwareupdater.repyhelpercache')
-
-# prepend this to my python path
-#sys.path = ['softwareupdater.repyhelpercache'] + sys.path
-#repyhelpercachedir = repyhelper.set_importcachedir('softwareupdater.repyhelpercache')
-
 
 # this is being done so that the resources accounting doesn't interfere with logging
 from repyportability import *
