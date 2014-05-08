@@ -28,9 +28,9 @@ repycachedir = tempfile.mkdtemp()
 
 sys.path = [repycachedir] + sys.path
 
-dy_import_module_symbols("rsa.repy")
-dy_import_module_symbols("signeddata.repy")
-dy_import_module_symbols("time.repy")
+dy_import_module_symbols("rsa.r2py")
+dy_import_module_symbols("signeddata.r2py")
+dy_import_module_symbols("time.r2py")
 
 shutil.rmtree(repycachedir)
 

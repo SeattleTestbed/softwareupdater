@@ -6,7 +6,7 @@ add_dy_support(_context)
 import sys
 import random
 
-dy_import_module_symbols("rsa.repy")
+dy_import_module_symbols("rsa.r2py")
 
 # need to support random number generation
 randomfloat = random.random
