@@ -14,8 +14,8 @@ add_dy_support(_context)
 
 # Librepy is used to be backward compatible with repyV1
 # since we are using the old httpserver.
-dy_import_module_symbols("librepy.repy")
-dy_import_module_symbols("httpserver.repy")
+dy_import_module_symbols("librepy.r2py")
+dy_import_module_symbols("httpserver.r2py")
 
 #webserver functionality based off the old webserver
 def callbackfunc(request_dictionary):
