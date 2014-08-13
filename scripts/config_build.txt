@@ -1,0 +1,15 @@
+seattlelib_v2/*
+clearinghouse/*
+repy_v2/*
+portability/*
+softwareupdater/*
+nodemanager/*
+utf/*
+dist/LICENSE.txt
+# Tests
+test seattlelib_v2/tests/*
+test clearinghouse/tests/*
+test repy_v2/testsV2/*
+test portability/tests/*
+test nodemanager/tests/*
+test softwareupdater/test/*
