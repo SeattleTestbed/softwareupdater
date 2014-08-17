@@ -1,15 +1,11 @@
-seattlelib_v2/*
-clearinghouse/*
-repy_v2/*
-portability/*
-softwareupdater/*
-nodemanager/*
-utf/*
-dist/LICENSE.txt
+dependencies/seattlelib_v2/*
+dependencies/repy_v2/*
+dependencies/portability/*
+../*
+common/*
+common/utf/*
 # Tests
-test seattlelib_v2/tests/*
-test clearinghouse/tests/*
-test repy_v2/testsV2/*
-test portability/tests/*
-test nodemanager/tests/*
-test softwareupdater/test/*
+test dependencies/seattlelib_v2/tests/*
+test dependencies/repy_v2/testsV2/*
+test dependencies/portability/tests/*
+test ../test/*
