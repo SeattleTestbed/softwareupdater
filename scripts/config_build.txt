@@ -1,8 +1,8 @@
-seattlelib_v2/*
-repy_v2/*
-portability/*
-../*
-common/*
-common/utf/*
+DEPENDENCIES/seattlelib_v2/*
+DEPENDENCIES/repy_v2/*
+DEPENDENCIES/portability/*
+./*
+DEPENDENCIES/common/*
+DEPENDENCIES/common/utf/*
 # Tests
-test ../test/*
+test test/*
