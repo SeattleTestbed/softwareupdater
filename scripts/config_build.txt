@@ -7,3 +7,4 @@ DEPENDENCIES/common/*
 # Tests
 test DEPENDENCIES/common/utf/*
 test test/*
+test DEPENDENCIES/nodemanager/nminit.py
